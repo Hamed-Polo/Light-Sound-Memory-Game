@@ -4,23 +4,31 @@ const cluePauseTime = 333; //how long to pause in between clues
 const nextClueWaitTime = 1000; //how long to wait before starting playback of the clue sequence
 
 //Global Variables
-var pattern = [4, 2, 4, 3, 3, 1, 2, 4];
+var pattern = [];
 var progress = 0; 
 var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5; //must be between 0.0 and 1.0
 var guessCounter = 0;
 
+function randomPattern(){
+  for (var h = 0; h < 8; h++){
+  pattern.push((Math.floor(1 + Math.random() * Math.floor(4))));
+  }
+}
+
 function startGame(){
   //initialize game variables
+  strikes = 0;
   progress = 0;
   gamePlaying = true;
+  randomPattern();
   
   // swap the Start and Stop buttons
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
   
-  playClueSequence();
+  playClueSequence(); 
 }
 
 function stopGame(){
